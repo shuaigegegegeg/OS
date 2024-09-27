@@ -117,6 +117,24 @@ void interrupt_handler(struct trapframe *tf) {
             if (++ticks % TICK_NUM == 0) {
                 print_ticks();
                 if(ticks%(10*TICK_NUM)==0){
+                    //非法指令异常
+                    
+                    asm volatile(
+                        "mret\n\t"
+                        :
+                        :
+                        : "memory"
+                     );
+                     
+                    //断点异常
+                    /*
+                      asm volatile(
+                        "ebreak\n\t"
+                        :
+                        :
+                        : "memory"
+                     );
+                     */
                     sbi_shutdown();
                 }
 
