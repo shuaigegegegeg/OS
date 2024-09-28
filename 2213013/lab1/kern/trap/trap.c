@@ -118,23 +118,23 @@ void interrupt_handler(struct trapframe *tf) {
                 print_ticks();
                 if(ticks%(10*TICK_NUM)==0){
                     //非法指令异常
-                    
+                    /*
                     asm volatile(
                         "mret\n\t"
                         :
                         :
                         : "memory"
                      );
-                     
+                     */
                     //断点异常
-                    /*
+                    
                       asm volatile(
                         "ebreak\n\t"
                         :
                         :
                         : "memory"
                      );
-                     */
+                     
                     sbi_shutdown();
                 }
 
@@ -192,7 +192,7 @@ void exception_handler(struct trapframe *tf) {
             */
            cprintf("Exception type: breakpoint\n");
             cprintf("ebreak caught at 0x%08x\n", tf->epc);
-            tf->epc += 4; // 更新异常指令地址到下一条指令，假设指令长度为 4 字节
+            tf->epc += 2; // 更新异常指令地址到下一条指令，假设指令长度为 4 字节
             break;
         case CAUSE_MISALIGNED_LOAD:
             break;
