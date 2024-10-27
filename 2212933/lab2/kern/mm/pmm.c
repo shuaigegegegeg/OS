@@ -10,6 +10,7 @@
 #include <string.h>
 #include <../sync/sync.h>
 #include <riscv.h>
+#include <buddy_system_pmm.h>
 
 // virtual address of physical page array
 struct Page *pages;
